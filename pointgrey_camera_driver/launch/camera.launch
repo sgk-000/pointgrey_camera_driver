@@ -4,13 +4,14 @@
   <arg name="camera_name" default="camera" />
   <arg name="camera_serial" default="0" />
   <arg name="calibrated" default="0" />
+  <arg name="frame_id" default="camera" />
 
   <group ns="$(arg camera_name)">
     <node pkg="nodelet" type="nodelet" name="camera_nodelet_manager" args="manager" />
 
     <node pkg="nodelet" type="nodelet" name="camera_nodelet"
           args="load pointgrey_camera_driver/PointGreyCameraNodelet camera_nodelet_manager" >
-      <param name="frame_id" value="camera" />
+      <param name="frame_id" value="$(arg frame_id)" />
       <param name="serial" value="$(arg camera_serial)" />
 
       <!-- When unspecified, the driver will use the default framerate as given by the
